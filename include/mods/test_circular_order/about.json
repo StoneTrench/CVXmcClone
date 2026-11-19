@@ -1,0 +1,20 @@
+
+{
+  "moduleid": "test_circular_order",
+  "version": "1.0.0",
+  "links": {},
+  "compat": {
+    "gameversion": "0.1.0-alpha",
+    "depends": {},
+    "recommends": {},
+    "suggests": {},
+    "conflicts": {},
+    "breaks": {},
+    "loadafter": [
+      "module_b"
+    ],
+    "loadbefore": [
+      "module_b"
+    ]
+  }
+}

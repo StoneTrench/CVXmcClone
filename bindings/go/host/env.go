@@ -2,10 +2,11 @@
 package generated
 
 import (
-	"encoding/binary"
-	"math"
-	"context"
 	"github.com/tetratelabs/wazero/api"
+	"encoding/binary"
+	"context"
+	"unsafe"
+	"math"
 	"fmt"
 )
 
@@ -97,7 +98,7 @@ func HostAPILogError(r9 func(mod api.Module, msg string)())(HostBinding){
 		}
 	return r10
 }
-func HostAPIRegAddBlock(r9 func(mod api.Module, block BlockType)(namespaceid string))(HostBinding){
+func HostAPIRegAddBlock(r9 func(mod api.Module, block BlockType)(namespaceid string, err *string))(HostBinding){
 	r10 := HostBinding {
 			Name: "reg-add-block",
 			Method: func(ctx context.Context, mod api.Module, r3 uint32, r4 uint32, r7 uint32, r8 uint32) {
@@ -137,8 +138,8 @@ func HostAPIRegAddBlock(r9 func(mod api.Module, block BlockType)(namespaceid str
 	r22 := (BlockKind)(r23)
 	block.Kind = r22
 	
-	namespaceid:=r9(mod ,block)
-	r2 := make([]byte,0,15)
+	namespaceid, err:=r9(mod ,block)
+	r2 := make([]byte,0,24)
 	
 	r24 := []byte(namespaceid)
 	r26 := uint32(len(r24))
@@ -149,6 +150,22 @@ func HostAPIRegAddBlock(r9 func(mod api.Module, block BlockType)(namespaceid str
 	r27 := r24[r25]
 	r2 = append(r2, r27)
 	r25 += 1
+}
+	r30 := uint32(uintptr(unsafe.Pointer(err)))
+	r31 := r30
+	r2 = binary.LittleEndian.AppendUint32(r2, r31)
+	if r31 != 0 {
+	r29 := *err
+	r32 := []byte(r29)
+	r34 := uint32(len(r32))
+	r36 := r34
+	r2 = binary.LittleEndian.AppendUint32(r2, r36)
+	var r33 uint32 = 0
+	for r33 < r34 {
+	r35 := r32[r33]
+	r2 = append(r2, r35)
+	r33 += 1
+}
 }
 	var r5 uint32
 		__len :=len(r2)
@@ -166,7 +183,7 @@ func HostAPIRegAddBlock(r9 func(mod api.Module, block BlockType)(namespaceid str
 		}
 	return r10
 }
-func HostAPIRegGetBlock(r9 func(mod api.Module, namespaceid string)(block BlockType, err string))(HostBinding){
+func HostAPIRegGetBlock(r9 func(mod api.Module, namespaceid string)(block BlockType, err *string))(HostBinding){
 	r10 := HostBinding {
 			Name: "reg-get-block",
 			Method: func(ctx context.Context, mod api.Module, r3 uint32, r4 uint32, r7 uint32, r8 uint32) {
@@ -187,7 +204,7 @@ func HostAPIRegGetBlock(r9 func(mod api.Module, namespaceid string)(block BlockT
 	namespaceid := string(r11)
 	
 	block, err:=r9(mod ,namespaceid)
-	r2 := make([]byte,0,20)
+	r2 := make([]byte,0,24)
 	
 	r16 := block.Name
 	r17 := []byte(r16)
@@ -212,15 +229,21 @@ func HostAPIRegGetBlock(r9 func(mod api.Module, namespaceid string)(block BlockT
 	r27 := block.Kind
 	r28 := uint8(r27)
 	r2 = append(r2, r28)
-	r29 := []byte(err)
-	r31 := uint32(len(r29))
-	r33 := r31
-	r2 = binary.LittleEndian.AppendUint32(r2, r33)
-	var r30 uint32 = 0
-	for r30 < r31 {
-	r32 := r29[r30]
-	r2 = append(r2, r32)
-	r30 += 1
+	r30 := uint32(uintptr(unsafe.Pointer(err)))
+	r31 := r30
+	r2 = binary.LittleEndian.AppendUint32(r2, r31)
+	if r31 != 0 {
+	r29 := *err
+	r32 := []byte(r29)
+	r34 := uint32(len(r32))
+	r36 := r34
+	r2 = binary.LittleEndian.AppendUint32(r2, r36)
+	var r33 uint32 = 0
+	for r33 < r34 {
+	r35 := r32[r33]
+	r2 = append(r2, r35)
+	r33 += 1
+}
 }
 	var r5 uint32
 		__len :=len(r2)
@@ -238,7 +261,7 @@ func HostAPIRegGetBlock(r9 func(mod api.Module, namespaceid string)(block BlockT
 		}
 	return r10
 }
-func HostAPIAppendLang(r9 func(mod api.Module, name string)(err string))(HostBinding){
+func HostAPIAppendLang(r9 func(mod api.Module, name string)(err *string))(HostBinding){
 	r10 := HostBinding {
 			Name: "append-lang",
 			Method: func(ctx context.Context, mod api.Module, r3 uint32, r4 uint32, r7 uint32, r8 uint32) {
@@ -259,17 +282,23 @@ func HostAPIAppendLang(r9 func(mod api.Module, name string)(err string))(HostBin
 	name := string(r11)
 	
 	err:=r9(mod ,name)
-	r2 := make([]byte,0,10)
+	r2 := make([]byte,0,14)
 	
-	r16 := []byte(err)
-	r18 := uint32(len(r16))
-	r20 := r18
-	r2 = binary.LittleEndian.AppendUint32(r2, r20)
-	var r17 uint32 = 0
-	for r17 < r18 {
-	r19 := r16[r17]
-	r2 = append(r2, r19)
-	r17 += 1
+	r17 := uint32(uintptr(unsafe.Pointer(err)))
+	r18 := r17
+	r2 = binary.LittleEndian.AppendUint32(r2, r18)
+	if r18 != 0 {
+	r16 := *err
+	r19 := []byte(r16)
+	r21 := uint32(len(r19))
+	r23 := r21
+	r2 = binary.LittleEndian.AppendUint32(r2, r23)
+	var r20 uint32 = 0
+	for r20 < r21 {
+	r22 := r19[r20]
+	r2 = append(r2, r22)
+	r20 += 1
+}
 }
 	var r5 uint32
 		__len :=len(r2)

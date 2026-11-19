@@ -1,12 +1,9 @@
 {
-	"name": "me.stonetrench.core",
+	"schemaVersion": 0,
+	"moduleid": "me.stonetrench.core",
 	"version": "v1.0.0",
-	"description": "The primary content of this game.",
-	"author": "StoneTrench",
-
-	"api_version": 0,
-	"dependencies": {},
-	"incompatibilities": {},
-
-	"environment": {}
+	
+	"compat": {
+		"gameversion": "v0.1.0-alpha"
+	}
 }

@@ -1,0 +1,18 @@
+
+{
+  "moduleid": "test_missing_dependency",
+  "version": "1.0.0",
+  "links": {},
+  "compat": {
+    "gameversion": "0.1.0-alpha",
+    "depends": {
+      "nonexistent_module": "*"
+    },
+    "recommends": {},
+    "suggests": {},
+    "conflicts": {},
+    "breaks": {},
+    "loadafter": [],
+    "loadbefore": []
+  }
+}

@@ -1,0 +1,16 @@
+
+{
+  "moduleid": "test_game_version",
+  "version": "1.0.0",
+  "links": {},
+  "compat": {
+    "gameversion": "999.999.999",
+    "depends": {},
+    "recommends": {},
+    "suggests": {},
+    "conflicts": {},
+    "breaks": {},
+    "loadafter": [],
+    "loadbefore": []
+  }
+}

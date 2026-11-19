@@ -125,7 +125,7 @@ func LogError(msg string)(){
 }
 //go:wasmimport env reg-add-block
 func _Env_RegAddBlock(r3 uint32, r4 uint32, r5 uint32, r6 uint32)
-func RegAddBlock(block BlockType)(string){
+func RegAddBlock(block BlockType)(string, *string){
 	r1 := make([]byte,0,10)
 	
 	r7 := block.Name
@@ -177,14 +177,33 @@ func RegAddBlock(block BlockType)(string){
 	r21 += 1
 }
 	namespaceid := string(r20)
+	r27 := binary.LittleEndian.Uint32(r2)
+		r2 = r2[4:]
+	var err *string
+	if r27 != 0 {
+	r32 := binary.LittleEndian.Uint32(r2)
+		r2 = r2[4:]
+	r30 := r32
+	r28 := make([]uint8,r30)
+	var r29 uint32 = 0
+	for r29 < r30 {
+	r31 := r2[0]
+		r2 = r2[1:]
+	r28[r29] = r31
+	r29 += 1
+}
+	r25 := string(r28)
+	r33 := &r25
+	err = r33
+}
 	if len(r2) > 0 {
 			wasm_free(uint32(uintptr(unsafe.Pointer(&r2[0]))))
 		}
-	return namespaceid
+	return namespaceid, err
 }
 //go:wasmimport env reg-get-block
 func _Env_RegGetBlock(r3 uint32, r4 uint32, r5 uint32, r6 uint32)
-func RegGetBlock(namespaceid string)(BlockType, string){
+func RegGetBlock(namespaceid string)(BlockType, *string){
 	r1 := make([]byte,0,5)
 	
 	r7 := []byte(namespaceid)
@@ -243,18 +262,25 @@ func RegGetBlock(namespaceid string)(BlockType, string){
 		r2 = r2[1:]
 	r23 := (BlockKind)(r24)
 	block.Kind = r23
-	r29 := binary.LittleEndian.Uint32(r2)
+	r27 := binary.LittleEndian.Uint32(r2)
 		r2 = r2[4:]
-	r27 := r29
-	r25 := make([]uint8,r27)
-	var r26 uint32 = 0
-	for r26 < r27 {
-	r28 := r2[0]
+	var err *string
+	if r27 != 0 {
+	r32 := binary.LittleEndian.Uint32(r2)
+		r2 = r2[4:]
+	r30 := r32
+	r28 := make([]uint8,r30)
+	var r29 uint32 = 0
+	for r29 < r30 {
+	r31 := r2[0]
 		r2 = r2[1:]
-	r25[r26] = r28
-	r26 += 1
+	r28[r29] = r31
+	r29 += 1
 }
-	err := string(r25)
+	r25 := string(r28)
+	r33 := &r25
+	err = r33
+}
 	if len(r2) > 0 {
 			wasm_free(uint32(uintptr(unsafe.Pointer(&r2[0]))))
 		}
@@ -262,7 +288,7 @@ func RegGetBlock(namespaceid string)(BlockType, string){
 }
 //go:wasmimport env append-lang
 func _Env_AppendLang(r3 uint32, r4 uint32, r5 uint32, r6 uint32)
-func AppendLang(name string)(string){
+func AppendLang(name string)(*string){
 	r1 := make([]byte,0,5)
 	
 	r7 := []byte(name)
@@ -289,18 +315,25 @@ func AppendLang(name string)(string){
 		}
 	r2 := unsafe.Slice((*byte)(unsafe.Pointer(uintptr(r5))), int(r6))
 	
-	r16 := binary.LittleEndian.Uint32(r2)
+	r14 := binary.LittleEndian.Uint32(r2)
 		r2 = r2[4:]
-	r14 := r16
-	r12 := make([]uint8,r14)
-	var r13 uint32 = 0
-	for r13 < r14 {
-	r15 := r2[0]
+	var err *string
+	if r14 != 0 {
+	r19 := binary.LittleEndian.Uint32(r2)
+		r2 = r2[4:]
+	r17 := r19
+	r15 := make([]uint8,r17)
+	var r16 uint32 = 0
+	for r16 < r17 {
+	r18 := r2[0]
 		r2 = r2[1:]
-	r12[r13] = r15
-	r13 += 1
+	r15[r16] = r18
+	r16 += 1
 }
-	err := string(r12)
+	r12 := string(r15)
+	r20 := &r12
+	err = r20
+}
 	if len(r2) > 0 {
 			wasm_free(uint32(uintptr(unsafe.Pointer(&r2[0]))))
 		}

@@ -3,12 +3,12 @@ package client
 
 import (
 	"fmt"
+	"log/slog"
 
-	"github.com/StoneTrench/CovarexEngine/engine/core/log"
-	"github.com/StoneTrench/CovarexEngine/engine/platform"
 	"github.com/StoneTrench/CVXmcClone/src/game"
 	"github.com/StoneTrench/CVXmcClone/src/game/generation"
 	"github.com/StoneTrench/CVXmcClone/src/game/world"
+	"github.com/StoneTrench/CovarexEngine/engine/platform"
 	"github.com/StoneTrench/go-mat-lib/vec"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -18,20 +18,20 @@ func raylib_trace_log_callback(level int, msg string) {
 
 	switch rl.TraceLogLevel(level) {
 	case rl.LogInfo:
-		log.Info(msg)
+		slog.Info(msg)
 	case rl.LogWarning:
-		log.WarnStr(msg)
+		slog.Warn(msg)
 	case rl.LogError:
-		log.ErrorStr(msg)
+		slog.Error(msg)
 	case rl.LogFatal:
-		log.ErrorStr(msg)
+		slog.Error(msg)
 	default:
-		log.Info(fmt.Sprintf("(Unknown TraceLogLevel) %s", msg))
+		slog.Info(fmt.Sprintf("(Unknown TraceLogLevel) %s", msg))
 	}
 }
 
-func Init() error {
-	err := game.Init()
+func Init(vfs *platform.VFS) error {
+	err := game.Init(vfs)
 	if err != nil {
 		panic(err)
 	}
@@ -96,6 +96,7 @@ func Init() error {
 	}
 
 	rl.SetMain(update)
+	// rl.SetMainLoop(update)
 	for !rl.WindowShouldClose() {
 		update()
 	}

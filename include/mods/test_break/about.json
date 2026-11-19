@@ -1,0 +1,18 @@
+
+{
+  "moduleid": "test_break",
+  "version": "1.0.0",
+  "links": {},
+  "compat": {
+    "gameversion": "0.1.0-alpha",
+    "depends": {},
+    "recommends": {},
+    "suggests": {},
+    "conflicts": {},
+    "breaks": {
+      "existing_module": "*"
+    },
+    "loadafter": [],
+    "loadbefore": []
+  }
+}

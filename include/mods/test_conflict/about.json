@@ -1,0 +1,18 @@
+
+{
+  "moduleid": "test_conflict",
+  "version": "1.0.0",
+  "links": {},
+  "compat": {
+    "gameversion": "0.1.0-alpha",
+    "depends": {},
+    "recommends": {},
+    "suggests": {},
+    "conflicts": {
+      "existing_module": "*"
+    },
+    "breaks": {},
+    "loadafter": [],
+    "loadbefore": []
+  }
+}

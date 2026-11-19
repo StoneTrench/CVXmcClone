@@ -1,0 +1,9 @@
+{
+	"go.toolsEnvVars": {
+		"CGO_ENABLED": "0",
+		"GOOS": "windows",
+		"GOARCH": "amd64"
+		// "GOOS": "js",
+		// "GOARCH": "wasm"
+	}
+}

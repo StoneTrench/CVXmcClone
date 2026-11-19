@@ -1,0 +1,15 @@
+{
+	"moduleid": "existing_module",
+	"version": "1.0.0",
+	"links": {},
+	"compat": {
+		"gameversion": "0.1.0-alpha",
+		"depends": {},
+		"recommends": {},
+		"suggests": {},
+		"conflicts": {},
+		"breaks": {},
+		"loadafter": [],
+		"loadbefore": []
+	}
+}

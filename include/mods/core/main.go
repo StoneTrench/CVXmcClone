@@ -3,26 +3,38 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 
 	eb "github.com/StoneTrench/CVXmcClone/bindings/go/guest"
 )
 
+func ToError(s *string) error {
+	if s != nil {
+		return errors.New(*s)
+	}
+	return nil
+}
+
 func RegBlock(name string, r, g, b, a uint8, sld eb.BlockKind) {
-	namespace := eb.RegAddBlock(eb.BlockType{
+	namespace, err := eb.RegAddBlock(eb.BlockType{
 		Name:  name,
 		Color: eb.ColorU8{R: r, G: g, B: b, A: a},
 		Kind:  sld,
 	})
-	eb.LogInfo(fmt.Sprintf("Registered block: %s", namespace))
+	if err != nil {
+		eb.LogError(ToError(err).Error())
+	} else {
+		eb.LogInfo(fmt.Sprintf("Registered block: %s", namespace))
+	}
 }
 
 func init() {
 	eb.LogInfo("Module initialized!")
 
 	err := eb.AppendLang("en-us")
-	if len(err) > 0 {
-		eb.LogError(err)
+	if err != nil {
+		eb.LogError(ToError(err).Error())
 	}
 	RegBlock("air", 255, 0, 255, 255, eb.E_Air)
 	RegBlock("stone", 128, 128, 128, 255, eb.E_Solid)

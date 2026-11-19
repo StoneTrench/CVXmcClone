@@ -1,4 +1,4 @@
-sh s/build.sh windows amd64 RELEASE
-sh s/build.sh linux amd64 RELEASE
-sh s/build.sh darwin amd64 RELEASE
-# sh build.sh js wasm RELEASE
+go run github.com/StoneTrench/CovarexEngine/cli/build --os windows --arch amd64 --release
+go run github.com/StoneTrench/CovarexEngine/cli/build --os linux --arch amd64 --release
+go run github.com/StoneTrench/CovarexEngine/cli/build --os darwin --arch amd64 --release
+go run github.com/StoneTrench/CovarexEngine/cli/build --os js --arch wasm --release
